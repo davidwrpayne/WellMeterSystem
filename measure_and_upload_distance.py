@@ -5,20 +5,18 @@ import logging
 import requests
 import json
 
-
-
-# # Define GPIO to use on Pi
-GPIO.setmode(GPIO.BCM)
-GPIO.setwarnings(False)
 GPIO_TRIGGER = 17
 GPIO_ECHO = 22
 
-TRIGGER_TIME = 0.00001
-MAX_TIME = 0.015  # max time waiting for response in case something is missed
-GPIO.setup(GPIO_TRIGGER, GPIO.OUT)  # Trigger
-GPIO.setup(GPIO_ECHO, GPIO.IN, pull_up_down=GPIO.PUD_UP)  # Echo
-
-GPIO.output(GPIO_TRIGGER, False)
+def configure_gpio(trigger_pin, echo_pin)
+    # # Define GPIO to use on Pi
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setwarnings(False)
+    TRIGGER_TIME = 0.00001
+    MAX_TIME = 0.015  # max time waiting for response in case something is missed
+    GPIO.setup(trigger_pin, GPIO.OUT)  # Trigger
+    GPIO.setup(echo_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)  # Echo
+    GPIO.output(trigger_pin, False)
 
 
 # This function measures a distance
@@ -91,6 +89,8 @@ def upload_distance(bearer_token, distance):
 if __name__ == '__main__':
     try:
         configure_logging()
+        config = load_config()
+        configure_gpio(GPIO_TRIGGER, GPIO_ECHO))
         logging.debug('Starting Measurement Script')
         if True:
             distance = measure()
