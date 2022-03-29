@@ -1,0 +1,1 @@
+compile: go build -o well-meter-system cmd/main.go

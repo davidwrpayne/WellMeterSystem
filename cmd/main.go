@@ -1,5 +1,7 @@
 package main
 
+import "github.com/davidwrpayne/wellmetersystem/cmd/cli"
+
 func main() {
-	$END$
+	cli.Execute()
 }
