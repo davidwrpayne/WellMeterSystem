@@ -18,3 +18,7 @@ Then if a successful write to the recording service, it will mark the record for
 - possible improvement is to calculate the distance based on temprature and humdity if you had those sensors available.
 - Use ENV vars for GPIO pin configuration
 - Use ENV var to configure the output log location
+
+- write to the unpublished
+- publish by writing to http payne.work
+  - move measurement to published folder

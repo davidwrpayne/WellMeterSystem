@@ -3,4 +3,4 @@
 all: compile
 
 compile:
-	go build -o wms cmd/main.go
+	go build -o well-meter-system cmd/main.go

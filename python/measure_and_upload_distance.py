@@ -30,7 +30,6 @@ def round_trip_distance_cm_to_s(distance):
     speed_of_sound_cm_s = 34300.0
     return float(distance) * 2.0 / speed_of_sound_cm_s
 
-
 def measure():
     logging.debug("Configuring GPIO for measurement")
     # Pulse the trigger/echo line to initiate a measurement
