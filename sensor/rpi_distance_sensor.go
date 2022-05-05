@@ -80,7 +80,7 @@ func (s RPIDistanceSensor) MeasureCM() (float64, error) {
 
 	elapsedSeconds := echoStopTime.Sub(echoStartTime).Seconds()
 	if elapsedSeconds <= maxTimeSeconds {
-		return float64(elapsedSeconds*speedOfSoundCmPerS) / 2.0, nil
+		return elapsedSeconds * speedOfSoundCmPerS / 2.0, nil
 	} else {
 		return 0.0, errors.New("timeout reached while waiting for echo end")
 	}
