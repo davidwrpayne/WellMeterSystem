@@ -14,6 +14,28 @@ Working on a Go system that will record measurements to local disk / storage the
 Then if a successful write to the recording service, it will mark the record for soft delete.
 
 
+
+configuration is in config/
+
+software is broken up into different modules
+
+- command line interface code
+  - code for 2 commands
+    - measure
+    - report 
+- system of record reporting
+  - Publish to internet code
+- sensor
+  - FakeSensor
+  - RaspberryPI Sensor code
+- schema 
+  - contains the structs that describes the measurements
+- repository
+  - creation of unpublished record
+  - tracks unpublished records
+  - publish record
+  
+
 # TODO
 - possible improvement is to calculate the distance based on temprature and humdity if you had those sensors available.
 - Use ENV vars for GPIO pin configuration

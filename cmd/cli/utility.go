@@ -21,8 +21,13 @@ func configureDistanceSensor(cfg *config.SystemConfiguration) (sensor.DistanceSe
 }
 
 func configureSOR(systemConfig *config.SystemConfiguration) (sor.Service, error) {
-	//systemOfRecord := sor.NewHttpSystemOfRecord(systemConfig.RepositoryHost, systemConfig.RepositoryToken)
-	systemOfRecord := sor.NewLoggingSystemOfRecord()
+	var systemOfRecord sor.Service
+	if config.SystemConfig.DisableReporting {
+		systemOfRecord = sor.NewLoggingSystemOfRecord(systemConfig.RepositoryHost, systemConfig.RepositoryToken)
+	} else {
+		systemOfRecord = sor.NewHttpSystemOfRecord(systemConfig.RepositoryHost, systemConfig.RepositoryToken)
+	}
+
 	return systemOfRecord, nil
 }
 

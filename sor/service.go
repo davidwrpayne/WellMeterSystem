@@ -51,16 +51,23 @@ func (h HTTPSystemOfRecord) Publish(measurement *schema.Measurement) error {
 }
 
 type LoggingSOR struct {
+	token string
+	url   string
 }
 
 func (l LoggingSOR) Publish(measurement *schema.Measurement) error {
 	fmt.Printf("Publish called\n")
 	fmt.Printf("measurement %v\n", measurement)
+	fmt.Printf("would have POSTED to %s\n", l.url)
+	fmt.Printf("using bearer token POSTED to %s\n", l.token)
 	return nil
 }
 
 var _ Service = (*LoggingSOR)(nil)
 
-func NewLoggingSystemOfRecord() *LoggingSOR {
-	return &LoggingSOR{}
+func NewLoggingSystemOfRecord(url, bearerToken string) *LoggingSOR {
+	return &LoggingSOR{
+		url:   url,
+		token: bearerToken,
+	}
 }
