@@ -3,7 +3,6 @@ package cli
 import (
 	"fmt"
 	"github.com/davidwrpayne/wellmetersystem/config"
-	"github.com/davidwrpayne/wellmetersystem/repository"
 	"github.com/davidwrpayne/wellmetersystem/service"
 	"github.com/spf13/cobra"
 )
@@ -31,7 +30,8 @@ func measure_distance() {
 		return
 	}
 
-	service := service.NewWellMeasurement(repository.NewFileRepository("/Users/david.payne/personal/WellMeterSystem/data"), sensor, systemOfRecord)
+	storage := configureFileRepository()
+	service := service.NewWellMeasurement(storage, sensor, systemOfRecord)
 	err = service.MeasureWell()
 	if err != nil {
 		fmt.Errorf("Error measureing well %s", err)

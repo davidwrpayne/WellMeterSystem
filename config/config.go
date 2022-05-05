@@ -31,11 +31,12 @@ type RaspberryPiSensorConfig struct {
 }
 
 type SystemConfiguration struct {
-	Sensor            SensorType              `default:"Fake"`
-	RpiSensorConfig   RaspberryPiSensorConfig `split_words:"true"`
-	ReportMeasurement bool                    `default:"false"`
-	RepositoryHost    string                  `envconfig:"WATER_TANK_MONITOR_SERVICE_URL"`
-	RepositoryToken   string                  `envconfig:"MEASUREMENT_UPLOAD_API_BEARER_TOKEN"`
+	Sensor               SensorType              `default:"Fake"`
+	RpiSensorConfig      RaspberryPiSensorConfig `split_words:"true"`
+	ReportMeasurement    bool                    `default:"false"`
+	RepositoryHost       string                  `envconfig:"WATER_TANK_MONITOR_SERVICE_URL"`
+	RepositoryToken      string                  `envconfig:"MEASUREMENT_UPLOAD_API_BEARER_TOKEN"`
+	RepositoryFolderPath string                  `envconfig:"MEASUREMENT_STORAGE_PATH"`
 }
 
 func LoadConfigFromEnv(cfg *SystemConfiguration) error {

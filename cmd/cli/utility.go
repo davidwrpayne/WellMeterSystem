@@ -3,6 +3,7 @@ package cli
 import (
 	"errors"
 	"github.com/davidwrpayne/wellmetersystem/config"
+	"github.com/davidwrpayne/wellmetersystem/repository"
 	"github.com/davidwrpayne/wellmetersystem/sensor"
 	"github.com/davidwrpayne/wellmetersystem/sor"
 )
@@ -23,4 +24,8 @@ func configureSOR(systemConfig *config.SystemConfiguration) (sor.Service, error)
 	//systemOfRecord := sor.NewHttpSystemOfRecord(systemConfig.RepositoryHost, systemConfig.RepositoryToken)
 	systemOfRecord := sor.NewLoggingSystemOfRecord()
 	return systemOfRecord, nil
+}
+
+func configureFileRepository() repository.Storage {
+	return repository.NewFileRepository(config.SystemConfig.RepositoryFolderPath)
 }
