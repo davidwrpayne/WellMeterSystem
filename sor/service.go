@@ -49,3 +49,18 @@ func (h HTTPSystemOfRecord) Publish(measurement *schema.Measurement) error {
 
 	return nil // successful post
 }
+
+type LoggingSOR struct {
+}
+
+func (l LoggingSOR) Publish(measurement *schema.Measurement) error {
+	fmt.Printf("Publish called\n")
+	fmt.Printf("measurement %v\n", measurement)
+	return nil
+}
+
+var _ Service = (*LoggingSOR)(nil)
+
+func NewLoggingSystemOfRecord() *LoggingSOR {
+	return &LoggingSOR{}
+}

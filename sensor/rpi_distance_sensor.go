@@ -13,15 +13,16 @@ var _ DistanceSensor = (*RPIDistanceSensor)(nil)
 
 func NewRPIDistanceSensor(triggerGPIOPin, echoGPIOPin, mode int, warnings bool) *RPIDistanceSensor {
 	return &RPIDistanceSensor{
-		trigger:  triggerGPIOPin,
-		echo:     echoGPIOPin,
-		mode:     mode,
-		warnings: warnings,
+		trigger:     triggerGPIOPin,
+		echo:        echoGPIOPin,
+		mode:        mode,
+		warnings:    warnings,
 		triggerTime: 0.00001,
-		maxWaitTime: 0.015,  // max time waiting for response in case something is missed
+		maxWaitTime: 0.015, // max time waiting for response in case something is missed
 	}
 }
 
 func (R RPIDistanceSensor) MeasureCM() (float64, error) {
+	
 	panic("implement me")
 }
