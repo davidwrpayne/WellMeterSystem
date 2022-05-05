@@ -2,6 +2,7 @@
 .idea
 wms
 well-meter-system
-data
+data/published/*
+data/unpublished/*
 
 

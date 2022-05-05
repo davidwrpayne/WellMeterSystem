@@ -21,7 +21,7 @@ func (r *FileRepository) ReadUnpublished() (map[string]*schema.Measurement, erro
 	result := map[string]*schema.Measurement{}
 	for _, f := range files {
 		f.Name()
-		filePath := fmt.Sprintf("%s/%s", r.unpublishedDirectory(),f.Name())
+		filePath := fmt.Sprintf("%s/%s", r.unpublishedDirectory(), f.Name())
 		data, err := ioutil.ReadFile(filePath)
 		if err != nil {
 			return nil, err
@@ -47,7 +47,7 @@ func (r *FileRepository) MarkPublished(uuid string) error {
 }
 
 func (r *FileRepository) WriteMeasurement(measurement *schema.Measurement) error {
-	fileName:= fmt.Sprintf("%s.yaml", measurement.UUID)
+	fileName := fmt.Sprintf("%s.yaml", measurement.UUID)
 	filePath := fmt.Sprintf("%s/%s", r.unpublishedDirectory(), fileName)
 	marshaledData, err := yaml.Marshal(measurement)
 	if err != nil {
@@ -63,9 +63,9 @@ func (r *FileRepository) unpublishedDirectory() string {
 	return fmt.Sprintf("%s/unpublished", r.baseDirectory)
 }
 
-func NewFileRepository(baseeDirectory string) *FileRepository {
-	return  &FileRepository{
-		baseDirectory: baseeDirectory,
+func NewFileRepository(baseDirectory string) *FileRepository {
+	return &FileRepository{
+		baseDirectory: baseDirectory,
 		filename:      "file_repository.yaml",
 	}
 }

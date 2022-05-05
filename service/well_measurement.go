@@ -1,28 +1,28 @@
 package service
 
 import (
-	"github.com/davidwrpayne/wellmetersystem/client"
+	"fmt"
 	"github.com/davidwrpayne/wellmetersystem/repository"
 	"github.com/davidwrpayne/wellmetersystem/schema"
 	"github.com/davidwrpayne/wellmetersystem/sensor"
+	"github.com/davidwrpayne/wellmetersystem/sor"
 	"github.com/google/uuid"
 	"time"
 )
 
 type WellMeasurement struct {
-	store repository.Storage
-	sensor    sensor.DistanceSensor
-	sorClient client.SystemOfRecord
+	store                 repository.Storage
+	sensor                sensor.DistanceSensor
+	systemOfRecordService sor.Service
 }
 
-
-func NewWellMeasurement(store repository.Storage, sensor sensor.DistanceSensor) *WellMeasurement {
+func NewWellMeasurement(store repository.Storage, sensor sensor.DistanceSensor, recordService sor.Service) *WellMeasurement {
 	return &WellMeasurement{
-		store: store,
-		sensor: sensor,
+		store:                 store,
+		sensor:                sensor,
+		systemOfRecordService: recordService,
 	}
 }
-
 
 func (s *WellMeasurement) MeasureWell() error {
 	distanceCM, err := s.sensor.MeasureCM()
@@ -31,6 +31,7 @@ func (s *WellMeasurement) MeasureWell() error {
 	}
 	measuredAt := time.Now()
 	measurement := schema.NewMeasurement(uuid.NewString(), distanceCM, measuredAt)
+	fmt.Printf("took measurement %v", measurement)
 	return s.store.WriteMeasurement(measurement) // process only writes measurement to local storage.
 }
 
@@ -40,7 +41,7 @@ func (s *WellMeasurement) ReportAllMeasurements() error {
 		return err
 	}
 	for _, measurement := range unpublished {
-		err := s.sorClient.Publish(measurement)
+		err := s.systemOfRecordService.Publish(measurement)
 		if err != nil {
 			return err
 		} else {

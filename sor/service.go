@@ -1,4 +1,4 @@
-package client
+package sor
 
 import (
 	"bytes"
@@ -9,7 +9,7 @@ import (
 	"net/http"
 )
 
-type SystemOfRecord interface {
+type Service interface {
 	Publish(measurement *schema.Measurement) error
 }
 
@@ -22,7 +22,7 @@ type HTTPSystemOfRecord struct {
 	httpClient *http.Client
 }
 
-var _ SystemOfRecord = (*HTTPSystemOfRecord)(nil)
+var _ Service = (*HTTPSystemOfRecord)(nil)
 
 func NewHttpSystemOfRecord(hostUrl, bearerToken string) *HTTPSystemOfRecord {
 	return &HTTPSystemOfRecord{
