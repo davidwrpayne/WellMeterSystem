@@ -34,7 +34,7 @@ func measure_distance() {
 	service := service.NewWellMeasurement(storage, sensor, systemOfRecord)
 	err = service.MeasureWell()
 	if err != nil {
-		fmt.Errorf("Error measureing well %s", err)
+		fmt.Errorf("Error measuring well %s", err)
 		return
 	}
 }
