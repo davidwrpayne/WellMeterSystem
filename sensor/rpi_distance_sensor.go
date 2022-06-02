@@ -29,7 +29,7 @@ func NewRPIDistanceSensor(triggerGPIOPin, echoGPIOPin, mode int, warnings bool) 
 	}
 }
 
-const triggerTimeMicro = 10 * time.Microsecond
+const triggerTimeMicro = 1 * time.Microsecond
 const maxTimeSeconds = 0.015
 const speedOfSoundCmPerS = 34300.0
 
